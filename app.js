@@ -5,9 +5,12 @@ var scout = ["Scout", "6243", "74750", 5];
 
 var employees = [atticus, jem, boo, scout];
 
-var bonus = 0;
+for(i=0;i<employees.length;i++){
+  console.log(totalComp(employees[i]));
+}
 
 function sti (array){
+  var bonus = 0;
   switch(array[3]){
     case 3:
       bonus = 0.04;
@@ -29,4 +32,8 @@ function sti (array){
       bonus = 0.13;
     }
     return(bonus);
+}
+
+function totalComp(name){
+  return[name[0], (sti(name) * 100).toString() + '%' , parseInt(name[2]) + (name[2] * sti(name)), Math.round(name[2] * sti(name)) ];
 }
