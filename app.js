@@ -1,7 +1,30 @@
-var atticus = ["Atticus", "2405", "47000", 3];
-var jem = ["Jem", "62347", "63500", 4];
-var boo = ["Boo", "11435", "54000", 3];
-var scout = ["Scout", "6243", "74750", 5];
+var atticus = {
+  name: "Atticus",
+  emNum: "2405",
+  salary: "47000",
+  rating: 3
+};
+
+var jem = {
+  name: "Jem",
+  emNum: "62347",
+  salary: "63500",
+  rating: 4
+};
+
+var boo = {
+  name: "Boo",
+  emNum: "11435",
+  salary: "54000",
+  rating: 3
+};
+
+var scout = {
+  name: "Scout",
+  emNum: "6243",
+  salary:"74750",
+  rating: 5
+};
 
 var employees = [atticus, jem, boo, scout];
 
@@ -9,9 +32,9 @@ for(i=0;i<employees.length;i++){
   console.log(totalComp(employees[i]));
 }
 
-function sti (array){
+function sti (object){
   var bonus = 0;
-  switch(array[3]){
+  switch(object["rating"]){
     case 3:
       bonus = 0.04;
       break;
@@ -22,10 +45,10 @@ function sti (array){
       bonus = 0.10;
       break;
     }
-    if(array[1].length === 4){
+    if(object["emNum"].length === 4){
       bonus += 0.05;
     }
-    if(array[2] > 65000){
+    if(object["salary"] > 65000){
       bonus -= 0.01;
     }
     if(bonus > 0.13){
@@ -34,6 +57,11 @@ function sti (array){
     return(bonus);
 }
 
-function totalComp(name){
-  return[name[0], (sti(name) * 100).toString() + '%' , parseInt(name[2]) + (name[2] * sti(name)), Math.round(name[2] * sti(name)) ];
+
+function totalComp(employee){
+
+  return {name: employee["name"],
+  bonus: (sti(employee) * 100).toString() + '%' ,
+  totalSalary:'$' + (parseInt(employee["salary"]) + (employee["salary"] * sti(employee))).toLocaleString(),
+  totalBonus: '$' + (Math.round(employee["salary"] * sti(employee))).toLocaleString() };
 }
